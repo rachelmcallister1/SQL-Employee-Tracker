@@ -11,6 +11,25 @@ const connection = mysql.createConnection({
   database: 'employee_db'
 });
 
+function questions (){
+  inquirer.prompt([
+    {
+      type: 'list',
+      name: 'userChoice',
+      message: 'View Employee Tracker Options',
+      choices: [
+        'View All Departments',
+        'View All Roles',
+        'View All Employees',
+        'Add A Department',
+        'Add A Role',
+        'Add An Employee',
+        'Update An Employee Role',
+        'Exit'
+      ]
+    }])
+    }
+
 // simple query
 connection.query(
   'SELECT * FROM employee',
@@ -27,3 +46,6 @@ connection.query(
   }
 );
 // add prompt with list of options -> based on selected option run a diff. query. 
+
+// Function call to initialize app
+init();
