@@ -11,7 +11,7 @@ const connection = mysql.createConnection({
   database: 'employee_db'
 });
 
-function questions (){
+function questions() {
   inquirer.prompt([
     {
       type: 'list',
@@ -28,24 +28,69 @@ function questions (){
         'Exit'
       ]
     }])
+    .then((answers) => {
+      console.log(answers);
+      if (answers.userChoice === 'View All Departments') {
+        getAllDepartments()
+      }
+      if (answers.userChoice === 'View All Employees') {
+        getAllEmployees()
+      }
+      if(answers.userChoice === 'Add A Department') {
+        addDepartment();
+      }
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+}
+
+function getAllDepartments() {
+  connection.query(
+    'SELECT * FROM department',
+    function (err, results, fields) {
+      console.table(results);
     }
+  );
+}
 
-// simple query
-connection.query(
-  'SELECT * FROM employee',
-  function(err, results, fields) {
-    console.table(results); // results contains rows returned by server 
-  }
-);
+function addDepartment() {
+  inquirer.prompt(
+    [
+      {
+        type: "input",
+        name: "departmentName",
+        message: "What would you like the new department to be called?"
+      }
+    ]
+  )
+  .then((answers) => {
+    console.log(answers);
+    // query to insert new department
+  })
+  .catch((error) => {
+    console.log(error)
+  })
+}
 
-// with placeholder
+function getAllEmployees() {
+  // simple query
+  connection.query(
+    'SELECT * FROM employee',
+    function (err, results, fields) {
+      console.table(results); // results contains rows returned by server 
+    }
+  );
+}
+// with placeholder 
+function getAllRoles() {
 connection.query(
   'SELECT * FROM role',
-  function(err, results) {
+  function (err, results) {
     console.table(results);
   }
 );
+}
 // add prompt with list of options -> based on selected option run a diff. query. 
 
-// Function call to initialize app
-init();
+questions()
