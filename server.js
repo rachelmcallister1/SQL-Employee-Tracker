@@ -110,6 +110,16 @@ function addRole() {
         type: "input",
         name: "roleName",
         message: "What new role would you like to add?"
+      },
+      {
+        type: "input",
+        name: "roleSalary",
+        message: "What is the salary for this new role?"
+      },
+      {
+        type: "input",
+        name: "roleDepartment",
+        message: "What department is this role in?"
       }
     ]
   )
