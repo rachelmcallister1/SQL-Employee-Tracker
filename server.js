@@ -58,7 +58,8 @@ function getAllDepartments() {
   connection.query(
     'SELECT * FROM department',
     function (err, results, fields) {
-      console.table(results);
+      console.table(results); 
+      questions()
     }
   );
 }
@@ -68,6 +69,7 @@ function getAllEmployees() {
     'SELECT * FROM employee',
     function (err, results, fields) {
       console.table(results); // results contains rows returned by server 
+      questions()
     }
   );
 }
@@ -77,6 +79,7 @@ connection.query(
   'SELECT * FROM role',
   function (err, results) {
     console.table(results);
+    questions()
   }
 );
 }
@@ -92,7 +95,8 @@ function addDepartment() {
     ]
   )
   .then((answers) => {
-    console.log(answers);
+    console.log(answers); 
+    questions()
     // query to insert new department
   })
   .catch((error) => {
@@ -111,6 +115,7 @@ function addRole() {
   )
   .then((answers) => {
     console.log(answers);
+    questions()
     // query to insert new department
   })
   .catch((error) => {
@@ -129,6 +134,7 @@ function addEmployee() {
   )
   .then((answers) => {
     console.log(answers);
+    questions()
     // query to insert new department
   })
   .catch((error) => {
