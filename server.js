@@ -37,16 +37,16 @@ function questions() {
       if (answers.userChoice === 'View All Employees') {
         getAllEmployees()
       }
-      if(answers.userChoice === 'Add A Department') {
+      if (answers.userChoice === 'Add A Department') {
         addDepartment();
       }
-      if(answers.userChoice === 'Add A Role') {
+      if (answers.userChoice === 'Add A Role') {
         addRole();
       }
-      if(answers.userChoice === 'Add An Employee') {
+      if (answers.userChoice === 'Add An Employee') {
         addEmployee();
       }
-      if(answers.userChoice === 'Update An Employee Role') {
+      if (answers.userChoice === 'Update An Employee Role') {
         addEmployeeRole();
       }
     })
@@ -58,7 +58,7 @@ function getAllDepartments() {
   connection.query(
     'SELECT * FROM department',
     function (err, results, fields) {
-      console.table(results); 
+      console.table(results);
       questions()
     }
   );
@@ -75,13 +75,13 @@ function getAllEmployees() {
 }
 // with placeholder 
 function getAllRoles() {
-connection.query(
-  'SELECT * FROM role',
-  function (err, results) {
-    console.table(results);
-    questions()
-  }
-);
+  connection.query(
+    'SELECT * FROM role',
+    function (err, results) {
+      console.table(results);
+      questions()
+    }
+  );
 }
 // add prompt with list of options -> based on selected option run a diff. query. 
 function addDepartment() {
@@ -94,14 +94,14 @@ function addDepartment() {
       }
     ]
   )
-  .then((answers) => {
-    console.log(answers); 
-    questions()
-    // query to insert new department
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+    .then((answers) => {
+      console.log(answers);
+      questions()
+      // query to insert new department
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 function addRole() {
   inquirer.prompt(
@@ -123,32 +123,47 @@ function addRole() {
       }
     ]
   )
-  .then((answers) => {
-    console.log(answers);
-    questions()
-    // query to insert new department
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+    .then((answers) => {
+      console.log(answers);
+      questions()
+      // query to insert new department
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 function addEmployee() {
   inquirer.prompt(
     [
       {
         type: "input",
-        name: "employeeName",
-        message: "What is the name of the new employee you'd like to add?"
+        name: "employeeFirstName",
+        message: "What is the first name of the new employee you'd like to add?"
+      },
+      {
+        type: "input",
+        name: "employeeLastName",
+        message: "What is the last name of the new employee you'd like to add?"
+      },
+      {
+        type: "input",
+        name: "roleName",
+        message: "What is the name of the role that the new employee has?"
+      },
+      {
+        type: "input",
+        name: "managerName",
+        message: "What is the name of the new employee's manager?"
       }
     ]
   )
-  .then((answers) => {
-    console.log(answers);
-    questions()
-    // query to insert new department
-  })
-  .catch((error) => {
-    console.log(error)
-  })
+    .then((answers) => {
+      console.log(answers);
+      questions()
+      // query to insert new department
+    })
+    .catch((error) => {
+      console.log(error)
+    })
 }
 questions()
