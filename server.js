@@ -2,6 +2,7 @@
 const mysql = require('mysql2');
 const inquirer = require("inquirer")
 require("console.table");
+const PORT = process.env.PORT || 3001;
 // create the connection to database
 const connection = mysql.createConnection({
   host: 'localhost',
