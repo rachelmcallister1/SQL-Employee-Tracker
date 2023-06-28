@@ -24,7 +24,6 @@ function questions() {
         'Add A Department',
         'Add A Role',
         'Add An Employee',
-        'Update An Employee Role',
         'Exit'
       ]
     }])
@@ -47,9 +46,6 @@ function questions() {
       }
       if (answers.userChoice === 'Add An Employee') {
         addEmployee();
-      }
-      if (answers.userChoice === 'Update An Employee Role') {
-        addEmployeeRole();
       }
     })
     .catch((error) => {
@@ -168,4 +164,5 @@ function addEmployee() {
       console.log(error)
     })
 }
+
 questions()
