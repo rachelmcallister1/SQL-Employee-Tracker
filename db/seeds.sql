@@ -4,7 +4,6 @@ VALUES ("Brand Strategy"),
        ("Legal"),
        ("Sales"),
        ("Finance");
-    
 
 INSERT INTO role (title, salary, department_id)
 VALUES ("Assistant Manager",60000, 1),
