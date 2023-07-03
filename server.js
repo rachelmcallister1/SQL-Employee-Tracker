@@ -64,9 +64,10 @@ function getAllDepartments() {
 function getAllEmployees() {
   // simple query
   connection.query(
-    'SELECT * FROM employee',
+    'SELECT employee.id, employee.first_name AS "first name", employee.last_name AS "last name",role.title AS "title", role.salary AS "salary" FROM employee JOIN role ON employee.role_id = role.id ORDER BY employee.id ASC ',
     function (err, results, fields) {
       console.table(results); // results contains rows returned by server 
+      if (err) throw err;
       questions()
     }
   );
@@ -93,9 +94,10 @@ function addDepartment() {
     ]
   )
     .then((answers) => {
-      console.log(answers);
+     connection.query(
+      'INSERT INTO department SET ?', {name: answers.departmentName}
+     )
       questions()
-      // query to insert new department
     })
     .catch((error) => {
       console.log(error)
@@ -122,9 +124,11 @@ function addRole() {
     ]
   )
     .then((answers) => {
-      console.log(answers);
+      connection.query(
+         // query to insert new department
+        'INSERT INTO role SET ?', {title: answers.roleName, salary: answers.roleSalary, department_id: answers.roleDepartment}
+       )
       questions()
-      // query to insert new department
     })
     .catch((error) => {
       console.log(error)
