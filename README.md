@@ -23,4 +23,5 @@ As A business owner, I want to be able to view and manage the departments, roles
 ## Screenshot
 ![A screenshot of the Deployed Application](./images/screenshot.png)
 
-View website here: 
+Link to code: https://github.com/rachelmcallister1/SQL-Employee-Tracker
+Link to walkthrough video: https://www.youtube.com/watch?v=fgTdhK3DeLQ 

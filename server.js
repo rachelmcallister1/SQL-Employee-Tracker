@@ -23,8 +23,6 @@ function questions() {
         'View All Employees',
         'Add A Department',
         'Add A Role',
-        'Add An Employee',
-        'Update Employee Role',
         'Exit'
       ]
     }])
@@ -44,12 +42,6 @@ function questions() {
       }
       if (answers.userChoice === 'Add A Role') {
         addRole();
-      }
-      if (answers.userChoice === 'Add An Employee') {
-        addEmployee();
-      }
-      if (answers.userChoice === 'Update Employee Role') {
-        updateEmployeeRole();
       }
     })
     .catch((error) => {
