@@ -24,6 +24,7 @@ function questions() {
         'Add A Department',
         'Add A Role',
         'Add An Employee',
+        'Update Employee Role',
         'Exit'
       ]
     }])
@@ -46,6 +47,9 @@ function questions() {
       }
       if (answers.userChoice === 'Add An Employee') {
         addEmployee();
+      }
+      if (answers.userChoice === 'Update Employee Role') {
+        updateEmployeeRole();
       }
     })
     .catch((error) => {
@@ -94,9 +98,9 @@ function addDepartment() {
     ]
   )
     .then((answers) => {
-     connection.query(
-      'INSERT INTO department SET ?', {name: answers.departmentName}
-     )
+      connection.query(
+        'INSERT INTO department SET ?', { name: answers.departmentName }
+      )
       questions()
     })
     .catch((error) => {
@@ -104,69 +108,44 @@ function addDepartment() {
     })
 }
 function addRole() {
-  inquirer.prompt(
-    [
-      {
-        type: "input",
-        name: "roleName",
-        message: "What new role would you like to add?"
-      },
-      {
-        type: "input",
-        name: "roleSalary",
-        message: "What is the salary for this new role?"
-      },
-      {
-        type: "input",
-        name: "roleDepartment",
-        message: "What department is this role in?"
-      }
-    ]
+  connection.query(
+    'SELECT id, name FROM department',
+    function (err, results, fields) {
+      inquirer.prompt(
+        [
+          {
+            type: "input",
+            name: "title",
+            message: "What new role would you like to add?"
+          },
+          {
+            type: "input",
+            name: "salary",
+            message: "What is the salary for this new role?"
+          },
+          {
+            type: "list",
+            name: "department_id",
+            message: "What department is this role in?",
+            choices: results.map((department) => {
+              return {
+                name: department.name,
+                value: department.id
+              }
+            })
+          }])
+        .then((answers) => {
+          connection.query(
+            // query to insert new role
+            'INSERT INTO role SET ?', answers
+          )
+          questions()
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   )
-    .then((answers) => {
-      connection.query(
-         // query to insert new department
-        'INSERT INTO role SET ?', {title: answers.roleName, salary: answers.roleSalary, department_id: answers.roleDepartment}
-       )
-      questions()
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
-function addEmployee() {
-  inquirer.prompt(
-    [
-      {
-        type: "input",
-        name: "employeeFirstName",
-        message: "What is the first name of the new employee you'd like to add?"
-      },
-      {
-        type: "input",
-        name: "employeeLastName",
-        message: "What is the last name of the new employee you'd like to add?"
-      },
-      {
-        type: "input",
-        name: "roleName",
-        message: "What is the name of the role that the new employee has?"
-      },
-      {
-        type: "input",
-        name: "managerName",
-        message: "What is the name of the new employee's manager?"
-      }
-    ]
-  )
-    .then((answers) => {
-      console.log(answers);
-      questions()
-      // query to insert new department
-    })
-    .catch((error) => {
-      console.log(error)
-    })
-}
+  }
 
 questions()
