@@ -21,7 +21,7 @@ As A business owner, I want to be able to view and manage the departments, roles
 9. When I choose to update an employee role, then I am prompted to select an employee to update and their new role and this information is updated in the database
 
 ## Screenshot
-![A screenshot of the Deployed Application](./images/screenshot.png)
+![A screenshot of the Deployed Application](./images/employeesql.png)
 
 Link to code: https://github.com/rachelmcallister1/SQL-Employee-Tracker
 Link to walkthrough video: https://www.youtube.com/watch?v=fgTdhK3DeLQ 
